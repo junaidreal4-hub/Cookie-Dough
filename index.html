@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie and Dough — Homemade in Andaman</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ── RESET ── */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ── VARIABLES ── */
+    :root {
+      --bg:           #0d0d0d;
+      --bg2:          #111111;
+      --bg3:          #161616;
+      --surface:      #1a1a1a;
+      --border:       #2a2a2a;
+      --text:         #f5f0eb;
+      --text-muted:   #888880;
+      --text-dim:     #555550;
+      --accent:       #c8a97e;
+      --accent-dark:  #a8895e;
+    }
+
+    /* ── BASE ── */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 60px;
+      transition: background 0.4s, padding 0.4s, border-bottom 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 18px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .nav-logo span {
+      display: block;
+      font-size: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-order {
+      background: var(--accent);
+      color: #0d0d0d;
+      padding: 11px 28px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-order:hover { background: var(--accent-dark); color: #fff; }
+
+    /* ── HAMBURGER (mobile) ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--text);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-mobile a:hover { color: var(--accent); }
+    .nav-mobile-close {
+      position: absolute;
+      top: 28px; right: 28px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 28px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    /* ── HERO ── */
+    #hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;        /* ← changed from flex-end to center */
+      overflow: hidden;
+      padding-top: 190px;          /* ← pushes everything below the nav */
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a0f00 0%, #0d0d0d 50%, #0a0a0a 100%);
+    }
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/brookie.png');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.38;
+      transition: opacity 1.2s ease;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        #0d0d0d 0%,
+        rgba(13,13,13,0.55) 40%,
+        rgba(13,13,13,0.15) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px;            /* ← clean padding, no top/bottom */
+      max-width: 860px;
+    }
+    
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+      border: 1px solid rgba(200, 169, 126, 0.25);
+      padding: 7px 16px;
+    }
+    .hero-tag-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 7vw, 96px);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      margin-bottom: 32px;
+      margin-top: 40px; /* ← adds breathing room below the nav */
+      color: var(--text);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-title .block {
+      display: block;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 48px;
+      max-width: 400px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d0d0d;
+      padding: 15px 40px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+    .btn-ghost {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s;
+    }
+    .btn-ghost::after {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost:hover::after { width: 44px; }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 44px;
+      right: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-dim);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+    .hero-scroll-line {
+      width: 36px;
+      height: 1px;
+      background: var(--text-dim);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      background: var(--bg2);
+    }
+    .marquee-track {
+      display: flex;
+      animation: marquee 35s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .marquee-item span {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0 32px;
+      white-space: nowrap;
+    }
+    .marquee-item .sep {
+      color: var(--accent);
+      font-size: 14px;
+      padding: 0;
+      letter-spacing: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION COMMONS ── */
+    section {
+      padding: 120px 60px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5vw, 70px);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: var(--text);
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .divider {
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin: 28px 0;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      max-width: 480px;
+      font-weight: 300;
+    }
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    /* ── FEATURED SPLIT (Brookie) ── */
+    #featured {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 85vh;
+    }
+    .featured-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.9s ease;
+    }
+    .featured-img:hover img {
+      transform: scale(1.05);
+    }
+    .featured-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        transparent 60%,
+        rgba(13,13,13,0.4) 100%
+      );
+    }
+    .featured-body {
+      background: var(--bg2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 80px 80px 72px;
+      border-left: 1px solid var(--border);
+    }
+    .featured-body .section-title {
+      font-size: clamp(44px, 4.5vw, 68px);
+    }
+    .featured-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 44px;
+      max-width: 380px;
+      font-weight: 300;
+    }
+    .featured-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .featured-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .featured-stat-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── MENU SECTION ── */
+    #menu {
+      background: var(--bg2);
+      padding: 100px 60px 120px;
+    }
+    .menu-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      gap: 40px;
+    }
+    .menu-header-left { flex: 1; }
+    .menu-header-right {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      line-height: 1.7;
+      max-width: 280px;
+      text-align: right;
+      padding-bottom: 4px;
+    }
+
+    /* ── MENU TABS ── */
+    .menu-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 56px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .menu-tabs::-webkit-scrollbar { display: none; }
+    .menu-tab {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.25s, border-color 0.25s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .menu-tab:hover { color: var(--text-muted); }
+    .menu-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── MENU PANELS ── */
+    .menu-panel { display: none; }
+    .menu-panel.active { display: block; }
+
+    /* ── MENU GRID ── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 2px;
+    }
+    .menu-grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .menu-grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* ── MENU CARD ── */
+    .menu-card {
+      background: var(--surface);
+      overflow: hidden;
+      position: relative;
+      transition: background 0.25s;
+    }
+    .menu-card:hover { background: #1e1e1e; }
+    .menu-card-img-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .menu-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .menu-card:hover .menu-card-img {
+      transform: scale(1.05);
+    }
+    .menu-card-body {
+      padding: 22px 24px 26px;
+    }
+    .menu-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 7px;
+      line-height: 1.2;
+    }
+    .menu-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      font-weight: 300;
+    }
+    .menu-card-price {
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .menu-card-tag {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      margin-bottom: 12px;
+    }
+
+    /* ── WIDE CARD (spans 2 cols) ── */
+    .menu-card.wide {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .menu-card.wide .menu-card-img-wrap {
+      height: 100%;
+    }
+    .menu-card.wide .menu-card-img {
+      height: 100%;
+      aspect-ratio: unset;
+    }
+    .menu-card.wide .menu-card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 44px 48px;
+    }
+    .menu-card.wide .menu-card-name {
+      font-size: 34px;
+    }
+    .menu-card.wide .menu-card-desc {
+      font-size: 13px;
+      max-width: 320px;
+    }
+
+    /* ── TALL CARD ── */
+    .menu-card.tall .menu-card-img {
+      aspect-ratio: 3 / 4;
+    }
+
+    /* ── ASSORTED BOX BANNER ── */
+    .assorted-banner {
+      margin-top: 2px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 40px;
+      gap: 24px;
+    }
+    .assorted-banner-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--text);
+    }
+    .assorted-banner-text span {
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 0.06em;
+    }
+    .assorted-banner-img {
+      width: 180px;
+      height: 120px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+        /* ── FULL BLEED FEATURE ── */
+    .full-bleed {
+      position: relative;
+      height: 75vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 60px;
+    }
+    .full-bleed-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .full-bleed-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .full-bleed-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(13,13,13,0.92) 0%,
+        rgba(13,13,13,0.65) 50%,
+        rgba(13,13,13,0.1) 100%
+      );
+    }
+    .full-bleed-content {
+      position: relative;
+      z-index: 2;
+      max-width: 540px;
+    }
+    .full-bleed-content .section-title {
+      font-size: clamp(46px, 5.5vw, 80px);
+      margin-bottom: 20px;
+    }
+    .full-bleed-content .section-desc {
+      margin-bottom: 40px;
+    }
+
+    /* ── SPECIALS SECTION ── */
+    #specials {
+      background: var(--bg);
+      padding: 120px 60px;
+    }
+    .specials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+    .special-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .special-card-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .special-card:hover .special-card-img {
+      transform: scale(1.06);
+    }
+    .special-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(13,13,13,0.9) 0%,
+        rgba(13,13,13,0.3) 50%,
+        transparent 100%
+      );
+      transition: background 0.4s;
+    }
+    .special-card:hover .special-card-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(13,13,13,0.95) 0%,
+        rgba(13,13,13,0.5) 60%,
+        rgba(13,13,13,0.1) 100%
+      );
+    }
+    .special-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 28px;
+    }
+    .special-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+    .special-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+      max-width: 260px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .special-card:hover .special-card-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .special-card-tag {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    /* ── DESSERTS SECTION ── */
+    #desserts {
+      background: var(--bg3);
+      padding: 120px 60px;
+    }
+    .desserts-layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 60px;
+    }
+    .desserts-intro {
+      position: sticky;
+      top: 120px;
+    }
+    .desserts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .dessert-card {
+      background: var(--surface);
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .dessert-card:hover { background: #1e1e1e; }
+    .dessert-card-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .dessert-card:hover .dessert-card-img {
+      transform: scale(1.05);
+    }
+    .dessert-card-body {
+      padding: 20px 22px 24px;
+    }
+    .dessert-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .dessert-card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── ABOUT SECTION ── */
+    #about {
+      background: var(--bg2);
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+    .about-img {
+      position: relative;
+      overflow: hidden;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.9s ease;
+    }
+    .about-img:hover img { transform: scale(1.04); }
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      border-left: 1px solid var(--border);
+    }
+    .about-body .section-title {
+      font-size: clamp(36px, 3.5vw, 54px);
+    }
+    .about-highlights {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .about-highlight-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .about-highlight-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── ORDER CTA ── */
+    #order {
+      background: var(--bg);
+      text-align: center;
+      padding: 130px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .order-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(100px, 18vw, 220px);
+      font-weight: 300;
+      color: rgba(200, 169, 126, 0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    #order .section-label { text-align: center; }
+    #order .section-title {
+      font-size: clamp(44px, 6vw, 88px);
+      margin-bottom: 20px;
+    }
+    #order .section-desc {
+      margin: 0 auto 52px;
+      text-align: center;
+    }
+    .order-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-whatsapp {
+      background: #25d366;
+      color: #fff;
+      padding: 15px 40px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.2s;
+    }
+    .btn-whatsapp:hover { background: #1db954; }
+    .btn-instagram {
+      background: transparent;
+      color: var(--text-muted);
+      padding: 14px 40px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-instagram:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .order-contact-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 60px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .order-contact-item { text-align: center; }
+    .order-contact-label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .order-contact-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 56px 60px 36px;
+    }
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .footer-logo span {
+      display: block;
+      font-size: 10px;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+    .footer-tagline {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 14px;
+      max-width: 220px;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+    }
+    .footer-col-title {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .footer-made {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .footer-made span { color: var(--accent); }
+        /* ── MEDIA QUERIES ── */
+    @media (max-width: 1024px) {
+      nav { padding: 22px 36px; }
+      nav.scrolled { padding: 16px 36px; }
+      .nav-links { gap: 28px; }
+      section { padding: 90px 36px; }
+      #menu { padding: 90px 36px 100px; }
+
+      #featured {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .featured-img { height: 55vw; }
+      .featured-body {
+        padding: 60px 48px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      #about {
+        grid-template-columns: 1fr;
+      }
+      .about-img { height: 50vw; }
+      .about-body {
+        padding: 60px 48px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      .specials-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .desserts-layout {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .desserts-intro { position: static; }
+
+      footer { padding: 48px 36px 28px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+
+      .nav-links { display: none; }
+      .nav-order { display: none; }
+      .nav-hamburger { display: flex; }
+
+      section { padding: 72px 24px; }
+      #menu { padding: 72px 24px 80px; }
+      #specials { padding: 72px 24px; }
+      #desserts { padding: 72px 24px; }
+      #order { padding: 90px 24px; }
+      footer { padding: 40px 24px 24px; }
+
+      .hero-content {
+        padding: 0 24px;          /* ← clean mobile padding */
+        max-width: 100%;
+      }
+      .hero-title {
+        font-size: clamp(48px, 13vw, 80px);
+      }
+      .hero-scroll { right: 24px; }
+
+      #featured { grid-template-columns: 1fr; }
+      .featured-img { height: 65vw; }
+      .featured-body { padding: 48px 24px; }
+      .featured-stats { gap: 28px; }
+
+      .menu-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .menu-header-right { text-align: left; }
+      .menu-tab { padding: 12px 18px; font-size: 9px; }
+
+      .menu-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+      .menu-grid-3 { grid-template-columns: 1fr 1fr; }
+      .menu-grid-4 { grid-template-columns: 1fr 1fr; }
+
+      .menu-card.wide {
+        grid-column: span 2;
+        grid-template-columns: 1fr;
+      }
+      .menu-card.wide .menu-card-img-wrap { height: 52vw; }
+      .menu-card.wide .menu-card-body { padding: 28px 24px; }
+      .menu-card.wide .menu-card-name { font-size: 26px; }
+
+      .assorted-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px;
+      }
+      .assorted-banner-img { width: 100%; height: 48vw; }
+
+      .full-bleed { height: 80vw; padding: 0 24px; }
+      .full-bleed-content .section-title {
+        font-size: clamp(36px, 9vw, 56px);
+      }
+
+      .specials-grid {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+      .special-card-img { aspect-ratio: 4 / 3; }
+      .special-card-desc { opacity: 1; transform: none; }
+
+      .desserts-layout {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .desserts-grid { grid-template-columns: 1fr 1fr; }
+
+      #about { grid-template-columns: 1fr; }
+      .about-img { height: 60vw; }
+      .about-body { padding: 48px 24px; }
+      .about-highlights { gap: 28px; }
+
+      #order .section-title {
+        font-size: clamp(36px, 10vw, 60px);
+      }
+      .order-contact-row { gap: 28px; }
+
+      .footer-top {
+        flex-direction: column;
+        gap: 36px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: clamp(40px, 14vw, 64px); }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 18px; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-grid-3 { grid-template-columns: 1fr; }
+      .menu-grid-4 { grid-template-columns: 1fr; }
+      .menu-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
+
+      .desserts-grid { grid-template-columns: 1fr; }
+
+      .specials-grid { grid-template-columns: 1fr; }
+
+      .order-actions { flex-direction: column; width: 100%; }
+      .btn-whatsapp, .btn-instagram { width: 100%; justify-content: center; }
+
+      .featured-stats { flex-direction: column; gap: 20px; }
+      .about-highlights { flex-direction: column; gap: 20px; }
+    }
+        /* ── HERO STAMP ── */
+    .hero-stamp {
+      position: absolute;
+      bottom: 80px;
+      right: 120px;
+      z-index: 2;
+      transform: rotate(-18deg);        /* ← controls the tilt angle */
+      opacity: 0.85;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    .hero-stamp:hover {
+      transform: rotate(-6deg) scale(1.05);
+      opacity: 1;
+    }
+    .hero-stamp-img {
+      height: 190px;                    /* ← adjust size here */
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* mobile */
+    @media (max-width: 768px) {
+      .hero-stamp {
+        bottom: 60px;
+        right: 24px;
+      }
+      .hero-stamp-img {
+        height: 90px;
+      }
+    }
+        .footer-dev {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+    .footer-dev span {
+      color: var(--accent);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── MOBILE NAV OVERLAY ── -->
+  <div class="nav-mobile" id="navMobile">
+    <button class="nav-mobile-close" id="navClose">&times;</button>
+    <a href="#hero" onclick="closeMenu()">Home</a>
+    <a href="#featured" onclick="closeMenu()">Our Story</a>
+    <a href="#menu" onclick="closeMenu()">Menu</a>
+    <a href="#specials" onclick="closeMenu()">Specials</a>
+    <a href="#desserts" onclick="closeMenu()">Desserts</a>
+    <a href="#order" onclick="closeMenu()">Order</a>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      Cookie & Dough
+      <span>Homemade in Andaman</span>
+    </a>
+    <ul class="nav-links">
+      <a href="#featured">About</a></li>
+      <a href="#menu">Menu</a></li>
+      <a href="#specials">Specials</a></li>
+      <a href="#desserts">Desserts</a></li>
+      <a href="#order">Order</a></li>
+    </ul>
+    <a
+      href="https://wa.me/918900974459"
+      target="_blank"
+      class="nav-order"
+    >Order on WhatsApp</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="block">Baked with</span>
+        <span class="block"><em>love,</em></span>
+        <span class="block">crafted for</span>
+        <span class="block"><em>you.</em></span>
+      </h1>
+      <p class="hero-sub">
+        Artisan cookies, rich brownies, indulgent cheesecakes
+        and homemade desserts made fresh, delivered with care.
+      </p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn-primary">Explore the Menu</a>
+        <a href="#order" class="btn-ghost">Order Now</a>
+      </div>
+    </div>
+    <!-- ── HERO STAMP LOGO ── -->
+      <div class="hero-stamp">
+        <img src="assets/logo.png" alt="Cookie and Dough" class="hero-stamp-img" />
+      </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Scroll
+    </div>
+  </section>
+  <!-- ── MARQUEE ── -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <!-- First set -->
+      <div class="marquee-item">
+        <span>Stuffed Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Brownies</span>
+        <span class="sep">&#183;</span>
+        <span>Cheesecakes</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Fries</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Cake</span>
+        <span class="sep">&#183;</span>
+        <span>Brookie</span>
+        <span class="sep">&#183;</span>
+        <span>Mini Button Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Tub</span>
+        <span class="sep">&#183;</span>
+        <span>Homemade Desserts</span>
+        <span class="sep">&#183;</span>
+        <span>Plain Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Baked Fresh Daily</span>
+        <span class="sep">&#183;</span>
+        <span>Made in Andaman</span>
+        <span class="sep">&#183;</span>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-item">
+        <span>Stuffed Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Brownies</span>
+        <span class="sep">&#183;</span>
+        <span>Cheesecakes</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Fries</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Cake</span>
+        <span class="sep">&#183;</span>
+        <span>Brookie</span>
+        <span class="sep">&#183;</span>
+        <span>Mini Button Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Cookie Tub</span>
+        <span class="sep">&#183;</span>
+        <span>Homemade Desserts</span>
+        <span class="sep">&#183;</span>
+        <span>Plain Cookies</span>
+        <span class="sep">&#183;</span>
+        <span>Baked Fresh Daily</span>
+        <span class="sep">&#183;</span>
+        <span>Made in Andaman</span>
+        <span class="sep">&#183;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEATURED SPLIT — BROOKIE ── -->
+  <div id="featured">
+    <div class="featured-img reveal">
+      <img
+        src="assets/brookie.png"
+        alt="The Brookie — Cookie and Dough"
+        loading="lazy"
+      />
+      <div class="featured-img-overlay"></div>
+    </div>
+    <div class="featured-body">
+      <p class="section-label reveal">Signature Creation</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        The <em>Brookie</em>
+      </h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="featured-desc reveal reveal-delay-2">
+        The perfect fusion of two beloved classics — a rich, fudgy brownie
+        base meets a soft, chewy cookie top. Every bite delivers the best
+        of both worlds, baked fresh and made entirely by hand.
+      </p>
+      <a
+        href="https://wa.me/918900974459?text=Hi!%20I%27d%20like%20to%20order%20a%20Brookie."
+        target="_blank"
+        class="btn-primary reveal reveal-delay-3"
+      >Order the Brookie</a>
+      <div class="featured-stats reveal reveal-delay-4">
+        <div>
+          <div class="featured-stat-num">100%</div>
+          <div class="featured-stat-label">Homemade</div>
+        </div>
+        <div>
+          <div class="featured-stat-num">Fresh</div>
+          <div class="featured-stat-label">Baked Daily</div>
+        </div>
+        <div>
+          <div class="featured-stat-num">Made</div>
+          <div class="featured-stat-label">With Love</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ── MENU SECTION ── -->
+  <section id="menu">
+    <div class="menu-header">
+      <div class="menu-header-left">
+        <p class="section-label reveal">What We Make</p>
+        <h2 class="section-title reveal reveal-delay-1">The <em>Menu</em></h2>
+      </div>
+      <p class="menu-header-right reveal reveal-delay-2">
+        Everything is made fresh to order.<br />
+        Reach out on WhatsApp to place your order.
+      </p>
+    </div>
+
+    <!-- TABS -->
+    <div class="menu-tabs">
+      <button class="menu-tab active" data-tab="plain">Plain Cookies</button>
+      <button class="menu-tab" data-tab="stuffed">Stuffed Cookies</button>
+      <button class="menu-tab" data-tab="brownies">Brownies</button>
+      <button class="menu-tab" data-tab="cheesecakes">Cheesecakes</button>
+      <button class="menu-tab" data-tab="fries">Cookie Fries</button>
+      <button class="menu-tab" data-tab="tub">Cookie Tub</button>
+      <button class="menu-tab" data-tab="mini">Mini Button Cookies</button>
+    </div>
+
+    <!-- ── PANEL: PLAIN COOKIES ── -->
+    <div class="menu-panel active" id="tab-plain">
+      <div class="menu-grid menu-grid-3">
+
+        <div class="menu-card reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/choco_chunk_cookies.png"
+              alt="Choco Chunk Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">Choco Chunk Cookies</h3>
+            <p class="menu-card-desc">
+              Thick, golden cookies loaded with generous chunks
+              of rich dark chocolate in every bite.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/peanut_butter_cookies.png"
+              alt="Peanut Butter Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">Peanut Butter Cookies</h3>
+            <p class="menu-card-desc">
+              Soft and chewy with a deep, nutty peanut butter
+              flavour that lingers with every bite.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/smore_cookies.png"
+              alt="S'more Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">S'more Cookies</h3>
+            <p class="menu-card-desc">
+              A campfire classic reimagined — graham cracker,
+              chocolate and toasted marshmallow in cookie form.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/loaded_nuts_cookies.png"
+              alt="Loaded Nuts Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">Loaded Nuts</h3>
+            <p class="menu-card-desc">
+              Packed with a generous mix of roasted nuts for
+              a hearty, satisfying crunch in every bite.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/butter_cookies.png"
+              alt="Butter Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">Butter Cookies</h3>
+            <p class="menu-card-desc">
+              Classic, melt-in-your-mouth butter cookies with
+              a delicate crisp and rich buttery finish.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/nutella_cookies.png"
+              alt="Nutella Cookies"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Plain Cookie</div>
+            <h3 class="menu-card-name">Nutella Cookies</h3>
+            <p class="menu-card-desc">
+              Soft, fudgy cookies with the unmistakable richness
+              of Nutella baked right through the dough.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANEL: STUFFED COOKIES ── -->
+    <div class="menu-panel" id="tab-stuffed">
+      <div class="menu-grid menu-grid-4">
+
+        <div class="menu-card reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/chocochunk_fcookies.png"
+              alt="Stuffed Choco Chunk Cookie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Stuffed Cookie</div>
+            <h3 class="menu-card-name">Choco Chunk</h3>
+            <p class="menu-card-desc">
+              Choco chunk cookie stuffed with a luscious
+              chocolate mousse centre.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/peanutbutter_stuffed.png"
+              alt="Stuffed Peanut Butter Cookie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Stuffed Cookie</div>
+            <h3 class="menu-card-name">Peanut Butter</h3>
+            <p class="menu-card-desc">
+              Peanut butter cookie stuffed with a silky
+              smooth caramel ganache filling.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/smore_stuffed.png"
+              alt="Stuffed S'more Cookie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Stuffed Cookie</div>
+            <h3 class="menu-card-name">S'more</h3>
+            <p class="menu-card-desc">
+              S'more cookie stuffed with a rich, velvety
+              chocolate mousse hidden inside.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/nutella_stuffed.png"
+              alt="Stuffed Nutella Cookie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Stuffed Cookie</div>
+            <h3 class="menu-card-name">Nutella</h3>
+            <p class="menu-card-desc">
+              Nutella cookie stuffed generously with pure
+              Nutella for a double hazelnut hit.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANEL: BROWNIES ── -->
+    <div class="menu-panel" id="tab-brownies">
+      <div class="menu-grid menu-grid-3">
+
+        <div class="menu-card reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/fudgy_brownie.png"
+              alt="Fudgy Chocolate Brownie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Brownie</div>
+            <h3 class="menu-card-name">Fudgy Chocolate Brownie</h3>
+            <p class="menu-card-desc">
+              Dense, fudgy and intensely chocolatey — the
+              classic brownie done to perfection.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/walnut_brownie.png"
+              alt="Walnut Fudge Brownie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Brownie</div>
+            <h3 class="menu-card-name">Walnut Fudge Brownie</h3>
+            <p class="menu-card-desc">
+              Rich fudge brownie loaded with crunchy toasted
+              walnuts for the perfect texture contrast.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/chocolate_drizzle_brownie.png"
+              alt="Milk Dark Chocolate Drizzle Brownie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Brownie</div>
+            <h3 class="menu-card-name">Chocolate Drizzle Brownie</h3>
+            <p class="menu-card-desc">
+              Fudgy brownie finished with a generous drizzle
+              of milk or dark chocolate on top.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card wide reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/biscoff_brownie.png"
+              alt="Biscoff Brownie"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Brownie — Fan Favourite</div>
+            <h3 class="menu-card-name">Biscoff Brownie</h3>
+            <p class="menu-card-desc">
+              A fan favourite — our fudgy brownie swirled and topped
+              with rich, caramelised Biscoff spread for an indulgent
+              finish that keeps you coming back.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Assorted Box Banner -->
+      <div class="assorted-banner reveal">
+        <div>
+          <div class="assorted-banner-text">
+            Assorted Brownie Box
+            <span>Available in boxes of 4 and 8 — perfect for gifting</span>
+          </div>
+        </div>
+        <img
+          src="assets/assorted_box.png"
+          alt="Assorted Brownie Box"
+          class="assorted-banner-img"
+          loading="lazy"
+        />
+      </div>
+
+    </div>
+    <!-- ── PANEL: CHEESECAKES ── -->
+    <div class="menu-panel" id="tab-cheesecakes">
+      <div class="menu-grid menu-grid-4">
+
+        <div class="menu-card reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/chocolate_cheesecake.png"
+              alt="Chocolate Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Chocolate Cheesecake</h3>
+            <p class="menu-card-desc">
+              Velvety smooth cheesecake with a deep,
+              rich chocolate flavour throughout.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/oreo_cheesecake.png"
+              alt="Oreo Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Oreo Cheesecake</h3>
+            <p class="menu-card-desc">
+              Creamy cheesecake on a crunchy Oreo base,
+              topped with crushed Oreo crumbles.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/nutella_cheesecake.png"
+              alt="Nutella Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Nutella Cheesecake</h3>
+            <p class="menu-card-desc">
+              Silky cheesecake swirled with Nutella for
+              a hazelnut chocolate indulgence.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/strawberry_cheesecake.png"
+              alt="Strawberry Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Strawberry Cheesecake</h3>
+            <p class="menu-card-desc">
+              Light and creamy cheesecake topped with a
+              fresh, vibrant strawberry compote.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-1">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/blueberry_cheesecake.png"
+              alt="Blueberry Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Blueberry Cheesecake</h3>
+            <p class="menu-card-desc">
+              Classic creamy cheesecake crowned with a rich,
+              glossy blueberry topping.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-2">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/mango_cheesecake.png"
+              alt="Mango Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Mango Cheesecake</h3>
+            <p class="menu-card-desc">
+              Tropical and refreshing — smooth cheesecake
+              layered with sweet Alphonso mango.
+            </p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal reveal-delay-3">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/butterscotch_cheesecake.png"
+              alt="Butterscotch Cheesecake"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Cheesecake</div>
+            <h3 class="menu-card-name">Butterscotch Cheesecake</h3>
+            <p class="menu-card-desc">
+              Warm, caramel-toned cheesecake with a smooth
+              butterscotch finish and buttery base.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANEL: COOKIE FRIES ── -->
+    <div class="menu-panel" id="tab-fries">
+      <div class="menu-grid menu-grid-3">
+
+        <div class="menu-card wide reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/cookie_fries.png"
+              alt="Cookie Fries"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Signature Special</div>
+            <h3 class="menu-card-name">Cookie Fries</h3>
+            <p class="menu-card-desc">
+              Cookie dough shaped into fries and baked to golden
+              perfection. Served plain or with your choice of
+              dipping sauce — a fun, shareable treat unlike
+              anything else on the island.
+            </p>
+            <br/>
+            <p class="menu-card-price">Available with or without dips</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANEL: COOKIE TUB ── -->
+    <div class="menu-panel" id="tab-tub">
+      <div class="menu-grid menu-grid-3">
+
+        <div class="menu-card wide reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/cookie_tub.png"
+              alt="Melt in Mouth Cookie Tub"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Signature Creation</div>
+            <h3 class="menu-card-name">Melt in Mouth Cookie Tub</h3>
+            <p class="menu-card-desc">
+              A warm, gooey tub of freshly baked cookie dough
+              that melts the moment it hits your tongue. Served
+              straight from the oven — best enjoyed immediately
+              with a scoop of ice cream on top.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PANEL: MINI BUTTON COOKIES ── -->
+    <div class="menu-panel" id="tab-mini">
+      <div class="menu-grid menu-grid-3">
+
+        <div class="menu-card wide reveal">
+          <div class="menu-card-img-wrap">
+            <img
+              src="assets/mini_button_cookies.png"
+              alt="Mini Button Cookie Box"
+              class="menu-card-img"
+              loading="lazy"
+            />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-tag">Gift Box</div>
+            <h3 class="menu-card-name">Mini Button Cookie Box</h3>
+            <p class="menu-card-desc">
+              Adorable bite-sized button cookies packaged in a
+              beautiful gift box. The perfect treat to share or
+              gift to someone special — each little cookie packed
+              with the same love and care as our full-sized ones.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+  <!-- ── END MENU SECTION ── -->
+     <!-- ── COOKIE CAKE FULL BLEED ── -->
+  <div class="full-bleed">
+    <div class="full-bleed-bg">
+      <img
+        src="assets/cookie_cake.png"
+        alt="Cookie Cake — Cookie and Dough"
+        loading="lazy"
+      />
+    </div>
+    <div class="full-bleed-overlay"></div>
+    <div class="full-bleed-content">
+      <p class="section-label reveal">Custom Creation</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        The Cookie <em>Cake</em>
+      </h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="section-desc reveal reveal-delay-2">
+        A giant, celebration-worthy cookie baked as a cake —
+        soft in the centre, golden on the edges, and fully
+        customisable for any occasion. Birthdays, anniversaries
+        or just because — we make it special.
+      </p>
+      <a
+        href="https://wa.me/918900974459?text=Hi!%20I%27d%20like%20to%20order%20a%20Cookie%20Cake."
+        target="_blank"
+        class="btn-primary reveal reveal-delay-3"
+      >Order a Cookie Cake</a>
+    </div>
+  </div>
+
+  <!-- ── SPECIALS SECTION ── -->
+  <section id="specials">
+    <p class="section-label reveal">Something Different</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Our <em>Specials</em>
+    </h2>
+    <div class="divider reveal reveal-delay-2"></div>
+
+    <div class="specials-grid">
+
+      <div class="special-card reveal">
+        <img
+          src="assets/cookie_fries.png"
+          alt="Cookie Fries"
+          class="special-card-img"
+          loading="lazy"
+        />
+        <div class="special-card-overlay"></div>
+        <div class="special-card-body">
+          <span class="special-card-tag">Signature</span>
+          <h3 class="special-card-name">Cookie Fries</h3>
+          <p class="special-card-desc">
+            Cookie dough shaped into fries and baked golden.
+            Served with or without dipping sauces.
+          </p>
+        </div>
+      </div>
+
+      <div class="special-card reveal reveal-delay-1">
+        <img
+          src="assets/cookie_tub.png"
+          alt="Melt in Mouth Cookie Tub"
+          class="special-card-img"
+          loading="lazy"
+        />
+        <div class="special-card-overlay"></div>
+        <div class="special-card-body">
+          <span class="special-card-tag">Signature</span>
+          <h3 class="special-card-name">Melt in Mouth Cookie Tub</h3>
+          <p class="special-card-desc">
+            Warm, gooey cookie dough served straight from
+            the oven in a tub. Best with ice cream.
+          </p>
+        </div>
+      </div>
+
+      <div class="special-card reveal reveal-delay-2">
+        <img
+          src="assets/mini_button_cookies.png"
+          alt="Mini Button Cookie Box"
+          class="special-card-img"
+          loading="lazy"
+        />
+        <div class="special-card-overlay"></div>
+        <div class="special-card-body">
+          <span class="special-card-tag">Gift Box</span>
+          <h3 class="special-card-name">Mini Button Cookie Box</h3>
+          <p class="special-card-desc">
+            Bite-sized button cookies in a beautiful gift box.
+            Perfect for sharing or gifting someone special.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DESSERTS SECTION ── -->
+  <section id="desserts">
+    <div class="desserts-layout">
+
+      <div class="desserts-intro">
+        <p class="section-label reveal">Beyond Cookies</p>
+        <h2 class="section-title reveal reveal-delay-1">
+          Homemade <em>Desserts</em>
+        </h2>
+        <div class="divider reveal reveal-delay-2"></div>
+        <p class="section-desc reveal reveal-delay-2">
+          Rooted in tradition and made with love — our homemade
+          Indian desserts bring warmth and nostalgia to every bite.
+          Each recipe is crafted fresh, using time-honoured
+          methods passed down through generations.
+        </p>
+        <br />
+        <a
+          href="https://wa.me/918900974459?text=Hi!%20I%27d%20like%20to%20order%20a%20homemade%20dessert."
+          target="_blank"
+          class="btn-primary reveal reveal-delay-3"
+          style="margin-top: 16px; display: inline-block;"
+        >Order Desserts</a>
+      </div>
+
+      <div class="desserts-grid">
+
+        <div class="dessert-card reveal">
+          <img
+            src="assets/gajar_ka_halwa.png"
+            alt="Gajar ka Halwa"
+            class="dessert-card-img"
+            loading="lazy"
+          />
+          <div class="dessert-card-body">
+            <h3 class="dessert-card-name">Gajar ka Halwa</h3>
+            <p class="dessert-card-desc">
+              Slow-cooked grated carrots in rich milk,
+              ghee and cardamom. A timeless classic.
+            </p>
+          </div>
+        </div>
+
+        <div class="dessert-card reveal reveal-delay-1">
+          <img
+            src="assets/shahi_tukda.png"
+            alt="Shahi Tukda"
+            class="dessert-card-img"
+            loading="lazy"
+          />
+          <div class="dessert-card-body">
+            <h3 class="dessert-card-name">Shahi Tukda</h3>
+            <p class="dessert-card-desc">
+              Fried bread soaked in saffron rabri — a
+              royal Mughlai dessert, made with care.
+            </p>
+          </div>
+        </div>
+
+        <div class="dessert-card reveal reveal-delay-2">
+          <img
+            src="assets/gulab_jamun.png"
+            alt="Gulab Jamun"
+            class="dessert-card-img"
+            loading="lazy"
+          />
+          <div class="dessert-card-body">
+            <h3 class="dessert-card-name">Gulab Jamun</h3>
+            <p class="dessert-card-desc">
+              Soft, melt-in-mouth dumplings soaked in
+              rose-flavoured sugar syrup. Pure comfort.
+            </p>
+          </div>
+        </div>
+
+        <div class="dessert-card reveal reveal-delay-3">
+          <img
+            src="assets/nawabi_sewai.png"
+            alt="Nawabi Sewai"
+            class="dessert-card-img"
+            loading="lazy"
+          />
+          <div class="dessert-card-body">
+            <h3 class="dessert-card-name">Nawabi Sewai</h3>
+            <p class="dessert-card-desc">
+              Delicate vermicelli cooked in sweetened milk
+              with nuts and aromatic spices.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT SECTION ── -->
+  <div id="about">
+    <div class="about-img reveal">
+      <img
+        src="assets/cookie_cake.png"
+        alt="Cookie and Dough — Homemade in Andaman"
+        loading="lazy"
+      />
+    </div>
+    <div class="about-body">
+      <p class="section-label reveal">Our Story</p>
+      <h2 class="section-title reveal reveal-delay-1">
+        Made with <em>Heart</em>
+      </h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="section-desc reveal reveal-delay-2">
+        Cookie and Dough was born out of a simple belief — that
+        the best things in life are homemade. Nestled in the
+        beautiful Andaman Islands, we bake every item fresh,
+        by hand, with no shortcuts and no compromises.
+      </p>
+      <br />
+      <p class="section-desc reveal reveal-delay-3">
+        From our signature stuffed cookies to our indulgent
+        brownies and traditional Indian desserts, every recipe
+        is crafted with care and served with love. We are not
+        just a bakery — we are a homemade experience.
+      </p>
+      <div class="about-highlights">
+        <div class="reveal reveal-delay-1">
+          <div class="about-highlight-num">100%</div>
+          <div class="about-highlight-label">Homemade</div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="about-highlight-num">Fresh</div>
+          <div class="about-highlight-label">Baked to Order</div>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <div class="about-highlight-num">Andaman</div>
+          <div class="about-highlight-label">Island Made</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- ── ORDER CTA ── -->
+  <section id="order">
+    <div class="order-bg-text">Order</div>
+    <p class="section-label reveal">Get in Touch</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Ready to <em>Order?</em>
+    </h2>
+    <div class="divider reveal reveal-delay-2" style="margin: 20px auto 20px;"></div>
+    <p class="section-desc reveal reveal-delay-2">
+      Everything is made fresh to order. Reach out on WhatsApp
+      or follow us on Instagram to place your order or enquire
+      about custom creations and bulk orders.
+    </p>
+    <div class="order-actions reveal reveal-delay-3">
+      <a
+        href="https://wa.me/918900974459"
+        target="_blank"
+        class="btn-whatsapp"
+      >
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Order on WhatsApp
+      </a>
+      <a
+        href="https://instagram.com/cookieanddough_in"
+        target="_blank"
+        class="btn-instagram"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+        Follow on Instagram
+      </a>
+    </div>
+
+    <div class="order-contact-row reveal reveal-delay-4">
+      <div class="order-contact-item">
+        <div class="order-contact-label">WhatsApp</div>
+        <div class="order-contact-value">+91 89009 74459</div>
+      </div>
+      <div class="order-contact-item">
+        <div class="order-contact-label">Instagram</div>
+        <div class="order-contact-value">@cookieanddough_in</div>
+      </div>
+      <div class="order-contact-item">
+        <div class="order-contact-label">Location</div>
+        <div class="order-contact-value">Andaman Islands, India</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-top">
+
+      <div>
+        <a href="#hero" class="footer-logo">
+          Cookie and Dough
+          <span>Homemade in Andaman</span>
+        </a>
+        <p class="footer-tagline">
+          Artisan cookies, brownies, cheesecakes and homemade
+          desserts — baked fresh, made with love.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Menu</p>
+        <ul class="footer-links">
+          <a href="#menu" onclick="switchTab('plain')">Plain Cookies</a></li>
+          <a href="#menu" onclick="switchTab('stuffed')">Stuffed Cookies</a></li>
+          <a href="#menu" onclick="switchTab('brownies')">Brownies</a></li>
+          <a href="#menu" onclick="switchTab('cheesecakes')">Cheesecakes</a></li>
+          <a href="#menu" onclick="switchTab('fries')">Cookie Fries</a></li>
+          <a href="#menu" onclick="switchTab('mini')">Mini Button Cookies</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Explore</p>
+        <ul class="footer-links">
+          <a href="#featured">The Brookie</a></li>
+          <a href="#specials">Specials</a></li>
+          <a href="#desserts">Homemade Desserts</a></li>
+          <a href="#about">Our Story</a></li>
+          <a href="#order">Order Now</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+            <a href="https://wa.me/918900974459" target="_blank">
+              WhatsApp: +91 89009 74459
+            </a>
+          </li>
+            <a href="https://instagram.com/cookieanddough_in" target="_blank">
+              Instagram: @cookieanddough_in
+            </a>
+          </li>
+            <a href="#order">Andaman Islands, India</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        &copy; 2025 Cookie and Dough. All rights reserved.
+      </p>
+      <p class="footer-made">
+        Homemade with <span>&hearts;</span> in Andaman
+      </p>
+      <p class="footer-dev">
+        Designed &amp; Built by <span>MDJK</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ── JAVASCRIPT ── -->
+  <script>
+
+    /* ── NAV SCROLL ── */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    /* ── MOBILE MENU ── */
+    const navHamburger = document.getElementById('navHamburger');
+    const navMobile    = document.getElementById('navMobile');
+    const navClose     = document.getElementById('navClose');
+
+    navHamburger.addEventListener('click', () => {
+      navMobile.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    navClose.addEventListener('click', () => {
+      navMobile.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    function closeMenu() {
+      navMobile.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    /* ── MENU TABS ── */
+    const tabs   = document.querySelectorAll('.menu-tab');
+    const panels = document.querySelectorAll('.menu-panel');
+
+    function switchTab(tabId) {
+      tabs.forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === tabId);
+      });
+      panels.forEach(p => {
+        p.classList.toggle('active', p.id === 'tab-' + tabId);
+      });
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        switchTab(tab.dataset.tab);
+      });
+    });
+
+    /* ── SCROLL REVEAL ── */
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── HERO PARALLAX ── */
+    const heroBgImg = document.querySelector('.hero-bg-img');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < window.innerHeight) {
+        heroBgImg.style.transform =
+          `translateY(${window.scrollY * 0.3}px)`;
+      }
+    }, { passive: true });
+
+    /* ── SMOOTH ANCHOR for footer tab links ── */
+    document.querySelectorAll('a[href="#menu"]').forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(() => {
+          document.getElementById('menu').scrollIntoView({
+            behavior: 'smooth'
+          });
+        }, 10);
+      });
+    });
+
+  </script>
+
+</body>
+</html>
